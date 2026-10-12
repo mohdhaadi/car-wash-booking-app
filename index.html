@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CLUB CARWASH | Premium Cloud Detailing</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-dark: #0a0c10;
+      --card-bg: #12161f;
+      --card-border: #1e2638;
+      --accent-lime: #ccff00;
+      --accent-lime-hover: #b3e600;
+      --text-main: #ffffff;
+      --text-muted: #94a3b8;
+      --input-bg: #1a202c;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    /* Navigation Bar */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 24px 5%;
+      border-bottom: 1px solid var(--card-border);
+      background: rgba(10, 12, 16, 0.9);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(10px);
+    }
+
+    .logo {
+      font-size: 1.4rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+
+    .logo span {
+      color: var(--accent-lime);
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 32px;
+    }
+
+    nav a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: color 0.2s;
+    }
+
+    nav a:hover {
+      color: var(--accent-lime);
+    }
+
+    .nav-btn {
+      background: var(--accent-lime);
+      color: #000;
+      padding: 10px 20px;
+      border-radius: 30px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .nav-btn:hover {
+      background: var(--accent-lime-hover);
+      transform: translateY(-2px);
+    }
+
+    /* Hero Section with Video/Image Background */
+    .hero-section {
+      position: relative;
+      text-align: center;
+      padding: 120px 20px 100px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Video / Image Layer */
+    .hero-media {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 1;
+    }
+
+    /* Dark Overlay for High Text Legibility */
+    .hero-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        180deg,
+        rgba(10, 12, 16, 0.75) 0%,
+        rgba(10, 12, 16, 0.85) 60%,
+        rgba(10, 12, 16, 1) 100%
+      );
+      z-index: 2;
+    }
+
+    /* Ensure text stays above video layer */
+    .hero-content {
+      position: relative;
+      z-index: 3;
+      max-width: 900px;
+    }
+
+    .hero-title {
+      font-size: 3.8rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: -1px;
+      margin-bottom: 16px;
+      line-height: 1.1;
+      text-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+    }
+
+    .hero-title span {
+      color: var(--accent-lime);
+    }
+
+    .hero-subtitle {
+      color: #cbd5e1;
+      font-size: 1.15rem;
+      max-width: 650px;
+      margin: 0 auto;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+    }
+
+    /* Main Grid Layout */
+    .main-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px 80px;
+    }
+
+    .interactive-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      margin-bottom: 80px;
+    }
+
+    @media (max-width: 900px) {
+      .hero-title { font-size: 2.4rem; }
+      .interactive-grid { grid-template-columns: 1fr; }
+    }
+
+    /* Cards Styling */
+    .app-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 24px;
+      padding: 36px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    .app-card h2 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .app-card h2::before {
+      content: '';
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      background: var(--accent-lime);
+      border-radius: 50%;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 14px 18px;
+      background: var(--input-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      color: var(--text-main);
+      font-size: 1rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .form-group input:focus {
+      border-color: var(--accent-lime);
+    }
+
+    .btn-submit {
+      width: 100%;
+      padding: 16px;
+      background: var(--accent-lime);
+      color: #000;
+      border: none;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-weight: 800;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      transition: all 0.2s;
+      margin-top: 10px;
+    }
+
+    .btn-submit:hover {
+      background: var(--accent-lime-hover);
+      box-shadow: 0 0 20px rgba(204, 255, 0, 0.3);
+    }
+
+    .search-flex {
+      display: flex;
+      gap: 12px;
+    }
+
+    .search-flex input {
+      flex: 1;
+    }
+
+    .btn-search {
+      padding: 14px 24px;
+      background: var(--accent-lime);
+      color: #000;
+      border: none;
+      border-radius: 12px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .status-display {
+      margin-top: 24px;
+      padding: 20px;
+      background: var(--input-bg);
+      border-radius: 16px;
+      border: 1px solid var(--card-border);
+      display: none;
+    }
+
+    .status-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      font-size: 0.95rem;
+    }
+
+    .status-row:last-child { margin-bottom: 0; }
+    .status-row span { color: var(--text-muted); }
+    .status-row strong { color: var(--accent-lime); }
+
+    /* Features Grid */
+    .section-header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .section-header h2 {
+      font-size: 2.2rem;
+      font-weight: 800;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-bottom: 80px;
+    }
+
+    @media (max-width: 800px) {
+      .features-grid { grid-template-columns: 1fr; }
+    }
+
+    .feature-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      padding: 32px;
+      border-radius: 20px;
+      transition: transform 0.2s;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--accent-lime);
+    }
+
+    .feature-badge {
+      font-size: 2rem;
+      margin-bottom: 16px;
+    }
+
+    .feature-card h3 {
+      font-size: 1.25rem;
+      margin-bottom: 12px;
+    }
+
+    .feature-card p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    footer {
+      text-align: center;
+      padding: 40px;
+      border-top: 1px solid var(--card-border);
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navigation -->
+  <header>
+    <div class="logo">CLUB<span>CARWASH</span></div>
+    <nav>
+      <ul>
+        <li><a href="#booking">Book Slot</a></li>
+        <li><a href="#status">Check Status</a></li>
+        <li><a href="#services">Our Washes</a></li>
+      </ul>
+    </nav>
+    <a href="#booking" class="nav-btn">BOOK NOW</a>
+  </header>
+
+  <!-- Hero Banner with Video Background -->
+  <section class="hero-section">
+    <video class="hero-media" autoplay loop muted playsinline poster="https://images.unsplash.com/photo-1520340356584-f9917d1eea6f?auto=format&fit=crop&w=1920&q=80">
+      <source src="https://assets.mixkit.co/videos/preview/mixkit-car-washing-process-41528-large.mp4" type="video/mp4" />
+    </video>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <h1 class="hero-title">LET'S <span>WASH N' ROLL</span> YOUR RIDE</h1>
+      <p class="hero-subtitle">Smart cloud-powered booking & real-time automated stage tracking for ultimate car care.</p>
+    </div>
+  </section>
+
+  <!-- Interactive Forms Section -->
+  <main class="main-container">
+    <div class="interactive-grid">
+
+      <!-- Booking Form -->
+      <div class="app-card" id="booking">
+        <h2>BOOK A WASH SLOT</h2>
+        <form id="bookingForm">
+          <div class="form-group">
+            <label>Customer Name</label>
+            <input type="text" id="customerName" placeholder="e.g. Muhammed Hadi" required />
+          </div>
+          <div class="form-group">
+            <label>Email Address</label>
+            <input type="email" id="customerEmail" placeholder="e.g. mohdhadi319@gmail.com" required />
+          </div>
+          <div class="form-group">
+            <label>Vehicle Number</label>
+            <input type="text" id="vehicleNumber" placeholder="e.g. KL-58-AA-111" required />
+          </div>
+          <div class="form-group">
+            <label>Slot Time</label>
+            <input type="datetime-local" id="slotTime" required />
+          </div>
+          <button type="submit" class="btn-submit">CONFIRM BOOKING</button>
+        </form>
+      </div>
+
+      <!-- Live Status Check Form -->
+      <div class="app-card" id="status">
+        <h2>CHECK WASH STATUS</h2>
+        <p style="color: var(--text-muted); margin-bottom: 20px; font-size: 0.95rem;">Enter your Booking ID or Vehicle Number below to see live stage progress.</p>
+        <div class="search-flex">
+          <input type="text" id="searchQuery" placeholder="e.g. BK-9F3A1C or KL-58-AA-111" />
+          <button type="button" onclick="checkStatus()" class="btn-search">CHECK</button>
+        </div>
+
+        <div class="status-display" id="statusResult">
+          <div class="status-row"><span>Booking ID:</span> <strong id="resId">-</strong></div>
+          <div class="status-row"><span>Customer:</span> <strong id="resName">-</strong></div>
+          <div class="status-row"><span>Vehicle No:</span> <strong id="resVehicle">-</strong></div>
+          <div class="status-row"><span>Slot Time:</span> <strong id="resTime">-</strong></div>
+          <div class="status-row"><span>Current Status:</span> <strong id="resStatus" style="color: var(--accent-lime);">-</strong></div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Why Choose Us / Services Grid -->
+    <div class="section-header" id="services">
+      <h2>WHY CLUB CARWASH</h2>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-badge">🚀</div>
+        <h3>Automated Queue</h3>
+        <p>Instant cloud registration guarantees your slot without waiting in line.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-badge">📧</div>
+        <h3>Instant SES Notifications</h3>
+        <p>Receive immediate email confirmation and live stage status receipts.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-badge">✨</div>
+        <h3>Premium Detailing</h3>
+        <p>High-pressure foam wash, ceramic finish, and complete interior deep clean.</p>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    &copy; 2026 Club Carwash Express. Powered by AWS Cloud Architecture.
+  </footer>
+
+  <script>
+    const API_BASE_URL = "https://r21it78ii7.execute-api.eu-north-1.amazonaws.com/prod";
+
+    // Booking Submission Handler
+    document.getElementById('bookingForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const payload = {
+        customerName: document.getElementById('customerName').value,
+        email: document.getElementById('customerEmail').value,
+        vehicleNumber: document.getElementById('vehicleNumber').value,
+        slotTime: document.getElementById('slotTime').value
+      };
+
+      try {
+        const response = await fetch(`${API_BASE_URL}/booking`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        const data = await response.json();
+        if (response.ok) {
+          alert(`Booking Confirmed!\nBooking ID: ${data.bookingId}\nConfirmation email sent to ${payload.email}`);
+          document.getElementById('bookingForm').reset();
+        } else {
+          alert('Error: ' + (data.error || 'Failed to submit booking.'));
+        }
+      } catch (err) {
+        alert('Server communication error. Check API Gateway status.');
+      }
+    });
+
+    // Status Search Handler
+    async function checkStatus() {
+      const query = document.getElementById('searchQuery').value.trim();
+      if (!query) return alert('Please enter a Booking ID or Vehicle Number');
+
+      try {
+        const response = await fetch(`${API_BASE_URL}/booking?query=${encodeURIComponent(query)}`);
+        const data = await response.json();
+
+        if (response.ok && data) {
+          document.getElementById('resId').innerText = data.bookingId || '-';
+          document.getElementById('resName').innerText = data.customerName || '-';
+          document.getElementById('resVehicle').innerText = data.vehicleNumber || '-';
+          document.getElementById('resTime').innerText = data.slotTime || '-';
+          document.getElementById('resStatus').innerText = data.status || 'IN-QUEUE';
+          document.getElementById('statusResult').style.display = 'block';
+        } else {
+          alert('Booking not found.');
+          document.getElementById('statusResult').style.display = 'none';
+        }
+      } catch (err) {
+        alert('Failed to retrieve status.');
+      }
+    }
+  </script>
+</body>
+</html>
